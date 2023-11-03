@@ -1,0 +1,6 @@
+alpaca_trade_api
+psycopg2
+asyncpg
+asyncio
+requests
+PyYAML>=6.0.1
