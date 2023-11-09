@@ -27,18 +27,26 @@ assets = api.list_assets()
 for asset in assets:
     asset_exchange = getattr(asset, "exchange")
     asset_class = getattr(asset, "class")
+    asset_symbol = getattr(asset, "symbol")
+    asset_name = getattr(asset, "name")
     if asset_class == "us_equity" and asset_exchange != "OTC":
         cursor.execute(
             """
-            INSERT INTO stock (symbol, name, exchange)
-            SELECT %s, %s, %s
+            INSERT INTO stock (symbol, stock_name, exchange, stock_type, in_etf)
+            SELECT %s, %s, %s, %s, %s
             WHERE NOT EXISTS (SELECT symbol FROM stock WHERE symbol = %s);
             """,
-            (asset.symbol, asset.name, asset.exchange, asset.symbol),
+            (
+                asset_symbol,
+                asset_name,
+                asset_exchange,
+                asset_class,
+                False,
+                asset_symbol,
+            ),
         )
         print(
             f"Added stock {asset.symbol} {asset.name} {asset.exchange} to the database."
         )
 
 connection.commit()
-
