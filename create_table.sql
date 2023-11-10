@@ -69,11 +69,13 @@ CREATE TABLE etf_info_num (
     CONSTRAINT fk_symbol FOREIGN KEY (symbol) REFERENCES stock(symbol)
 );
 CREATE TABLE etf_holdings (
-    symbol TEXT NOT NULL,
-    holding TEXT NOT NULL,
-    share_symbol TEXT NOT NULL,
-    share TEXT NOT NULL,
-    CONSTRAINT fk_symbol FOREIGN KEY (symbol) REFERENCES stock(symbol)
+    etf_symbol TEXT,
+    stock_symbol TEXT,
+    holding TEXT,
+    shares DOUBLE PRECISION,
+    url TEXT,
+    CONSTRAINT fk_stock_symbol FOREIGN KEY (stock_symbol) REFERENCES stock(symbol),
+    CONSTRAINT fk_etf FOREIGN KEY (etf_symbol) REFERENCES stock(symbol)
 );
 --------------
 INSERT INTO etf (symbol)
