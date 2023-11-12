@@ -143,10 +143,3 @@ def etf_holdings(etfs: List[str]) -> None:
 # etf_info.set_index("metric", inplace=True)
 # etf_info = etf_info.transpose()
 # print(etf_info.get("%_share").iloc[0])
-
-"""
-fixed income
-dont buy hk china`
-    when retire
-    now trend? except retire u can have many buckets(life goals), different investments to support each bucket
-    """
