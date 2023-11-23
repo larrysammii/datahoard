@@ -8,6 +8,7 @@ import time
 # Connect to the database, configs are stored in your own config.py.
 connection = psycopg2.connect(
     host=config.DB_HOST,
+    port=config.DB_PORT,
     database=config.DB_NAME,
     user=config.DB_USER,
     password=config.DB_PASS,
@@ -25,6 +26,29 @@ etfs = get_available_etfs_list()
 Before inserting to database, make sure you have all the columns created
 
 """
+
+
+def create_etf_info_table() -> None:
+    cursor.execute(
+        """
+        CREATE TABLE IF NOT EXISTS etf_info (
+            symbol VARCHAR(10) PRIMARY KEY,
+            url VARCHAR(255),
+            issuer VARCHAR(255),
+            inception VARCHAR(255),
+            index_tracked VARCHAR(255),
+            last_updated VARCHAR(255),
+            category VARCHAR(255),
+            asset_class VARCHAR(255),
+            segment VARCHAR(255),
+            focus VARCHAR(255),
+            niche VARCHAR(255),
+            strategy VARCHAR(255),
+            weight_scheme VARCHAR(255)
+        );
+        """
+    )
+    connection.commit()
 
 
 # Get all the basic string info of an ETF

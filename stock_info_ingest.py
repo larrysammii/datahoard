@@ -17,7 +17,9 @@ connection = psycopg2.connect(
 cursor = connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
 # Instantiate the Alpaca API.
-api = tradeapi.REST(config.API_KEY, config.API_SECRET, base_url=config.API_URL)
+api = tradeapi.REST(
+    config.ALPACA_API_KEY, config.ALPACA_API_SECRET, base_url=config.ALPACA_API_URL
+)
 
 # List all available assets.
 assets = api.list_assets()
