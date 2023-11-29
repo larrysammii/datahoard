@@ -175,3 +175,6 @@ pyrightconfig.json
 
 # API Configuration
 config.py
+
+# VSCode config files
+.vscode/
